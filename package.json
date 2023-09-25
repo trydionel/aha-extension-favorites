@@ -19,6 +19,19 @@
           "entryPoint": "src/views/favoriteRecords.js",
           "host": "panel"
         }
+      },
+      "commands": {
+        "toggleFavorite": {
+          "title": "Add to favorites",
+          "entryPoint": "src/commands/toggleFavorite.js",
+          "commandType": "recordAction",
+          "recordTypes": [
+            "Epic",
+            "Feature",
+            "Requirement",
+            "Page"
+          ]
+        }
       }
     }
   }

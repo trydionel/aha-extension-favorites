@@ -30,20 +30,19 @@ export const FavoriteButton = ({ reference }: FavoriteButtonProps) => {
     setButtonStyles({
       backgroundColor: favorite ? 'var(--aha-yellow-100)' : 'var(--aha-gray-200)',
       color: favorite ? 'var(--aha-yellow-700)' : 'var(--aha-gray-800)',
-      padding: '4px',
       borderRadius: '50%',
       width: '20px',
       height: '20px',
       textAlign: 'center',
       fontSize: '10px',
-      lineHeight: '12px',
+      lineHeight: '20px',
       cursor: 'pointer',
     })
     setIconClasses(loading ? 'fa fa-spinner fa-spin' : (favorite ? "fa fa-star" : "far fa-star"))
   }, [loading, favorite])
 
 
-  return <span style={buttonStyles} onClick={e => toggleFavorite()}>
+  return <div className="favorite-button" style={buttonStyles} onClick={e => toggleFavorite()}>
     <i className={iconClasses} />
-  </span>
+  </div>
 }

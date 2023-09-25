@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-import { FavoriteButton } from './components/FavoriteButton'
+import { FavoriteButton } from '../components/FavoriteButton'
 
 export class FavoriteController {
   static instance: FavoriteController
@@ -15,7 +15,11 @@ export class FavoriteController {
     if (this.el) this.hideButton()
 
     const reference = this.extractRecordInfo()
-    if (!reference) return
+    if (!reference) {
+      console.log("No reference found in drawer")
+      return
+    }
+    console.log("Found reference", reference)
 
     const container = document.querySelector('#drawer-nav__row--actions .drawer-nav__cell:first-of-type')
     const button = document.createElement('span')
@@ -30,7 +34,7 @@ export class FavoriteController {
   }
 
   extractRecordInfo(): FavoriteReference {
-    const tabbedRecordEl = document.querySelector('.tabbed-record')
+    const tabbedRecordEl = document.querySelector('.drawer .tabbed-record')
     if (!tabbedRecordEl) return
 
     const [ typename, id ] = tabbedRecordEl.getAttribute('data-reactive-record').split("-")

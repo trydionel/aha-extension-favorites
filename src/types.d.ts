@@ -6,3 +6,5 @@ interface FavoriteReference {
 interface FavoriteButtonProps {
   reference: FavoriteReference
 }
+
+type DrawerCallback = (Element) => void
