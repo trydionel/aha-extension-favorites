@@ -19,7 +19,6 @@ export class FavoriteController {
       console.log("No reference found in drawer")
       return
     }
-    console.log("Found reference", reference)
 
     const container = document.querySelector('#drawer-nav__row--actions .drawer-nav__cell:first-of-type')
     const button = document.createElement('span')

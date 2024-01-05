@@ -8,3 +8,9 @@ interface FavoriteButtonProps {
 }
 
 type DrawerCallback = (Element) => void
+
+declare namespace JSX {
+  interface IntrinsicElements {
+    "aha-record-reference": any;
+  }
+}

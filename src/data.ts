@@ -24,12 +24,34 @@ export const removeFavorite = async (reference: FavoriteReference) => {
   aha.user.setExtensionField(IDENTIFIER, FIELD_NAME, newFavorites)
 }
 
+export const clearFavorites = async () => {
+  aha.user.clearExtensionField(IDENTIFIER, FIELD_NAME)
+}
+
 export function groupBy<T>(xs: T[], key: keyof(T)): { [key: string]: T[] } {
   return xs.reduce((acc, x) => {
     const idx = x[key] as string;
     (acc[idx] = acc[idx] || []).push(x)
     return acc
   }, {})
+}
+
+export async function bulkFetchDetails(typename: string, references: FavoriteReference[]) {
+  if (typename.includes("::")) {
+    typename = typename.split("::")[1] // drop namespace
+  }
+
+  const Model = aha.models[typename]
+  if (!Model) {
+    console.warn(`Unable to find Aha! model for '${typename}'`)
+    return []
+  }
+
+  const result = await Model.select(["name", "referenceNum", "path"])
+    .where({ id: references.map(r => r.id) })
+    .all()
+
+  return [typename, result.models]
 }
 
 const matchingRecord = (a: FavoriteReference, b: FavoriteReference) => {
